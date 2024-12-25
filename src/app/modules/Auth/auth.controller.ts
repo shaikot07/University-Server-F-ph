@@ -48,8 +48,10 @@ const refreshToken = catchAsync(async (req, res) => {
   });
 });
 
+
 export const AuthControllers = {
   loginUser,
   changePassword,
   refreshToken,
+  forgetPassword
 };
