@@ -62,7 +62,7 @@ const changeStatus = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Status is updated succesfully',
+    message: 'Status is updated successfully',
     data: result,
   });
 });
