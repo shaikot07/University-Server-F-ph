@@ -9,7 +9,7 @@ class QueryBuilder<T> {
     this.query = query;
   }
 
-//   search method 
+  //   search method
   search(searchableFields: string[]) {
     const searchTerm = this?.query?.searchTerm;
     if (searchTerm) {
@@ -26,9 +26,9 @@ class QueryBuilder<T> {
     return this;
   }
 
-//   method for filter 
+  //   method for filter
 
-filter() {
+  filter() {
     const queryObj = { ...this.query }; // copy
 
     // Filtering
@@ -41,7 +41,7 @@ filter() {
     return this;
   }
 
-//   sort method 
+  //   sort method
   sort() {
     const sort =
       (this?.query?.sort as string)?.split(',')?.join(' ') || '-createdAt';
@@ -50,7 +50,7 @@ filter() {
     return this;
   }
 
-//   pagination method 
+  //   pagination method
   paginate() {
     const page = Number(this?.query?.page) || 1;
     const limit = Number(this?.query?.limit) || 10;
@@ -61,7 +61,7 @@ filter() {
     return this;
   }
 
-//   fields filtaring 
+  //   fields filtaring
   fields() {
     const fields =
       (this?.query?.fields as string)?.split(',')?.join(' ') || '-__v';
@@ -69,7 +69,20 @@ filter() {
     this.modelQuery = this.modelQuery.select(fields);
     return this;
   }
- 
+  async countTotal() {
+    const totalQueries = this.modelQuery.getFilter();
+    const total = await this.modelQuery.model.countDocuments(totalQueries);
+    const page = Number(this?.query?.page) || 1;
+    const limit = Number(this?.query?.limit) || 10;
+    const totalPage = Math.ceil(total / limit);
+
+    return {
+      page,
+      limit,
+      total,
+      totalPage,
+    };
+  }
 }
 
 export default QueryBuilder;
