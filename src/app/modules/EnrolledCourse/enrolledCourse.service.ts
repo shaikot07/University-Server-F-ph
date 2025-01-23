@@ -6,12 +6,11 @@ import AppError from '../../errors/AppError';
 import { Course } from '../Course/course.model';
 import { Faculty } from '../Faculty/faculty.model';
 import { OfferedCourse } from '../OfferedCourse/OfferedCourse.model';
+import { SemesterRegistration } from '../semesterRegistration/semesterRegistration.model';
+import { Student } from '../student/student.model';
 import { TEnrolledCourse } from './enrolledCourse.interface';
 import EnrolledCourse from './enrolledCourse.model';
 import { calculateGradeAndPoints } from './enrolledCourse.utils';
-import { Student } from '../student/student.model';
-import { SemesterRegistration } from '../semesterRegistration/semesterRegistration.model';
-
 
 const createEnrolledCourseIntoDB = async (
   userId: string,
